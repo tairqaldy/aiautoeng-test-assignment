@@ -5,11 +5,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from PIL import Image, ImageDraw, ImageFont
 
 load_dotenv()
 
 INPUT_PATH = Path("input/image-1.png")
 OUTPUT_PATH = Path("output/image-1.json")
+BOXES_PATH = Path("output/image-1-boxes.png")
 
 PROMPT = """
 Find all Russian text on this engineering drawing.
@@ -25,7 +27,7 @@ Keep translations short so they fit in table cells.
 """
 
 
-def main():
+def call_gemini():
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise SystemExit("GEMINI_API_KEY missing in .env")
@@ -46,10 +48,35 @@ def main():
 
     OUTPUT_PATH.parent.mkdir(exist_ok=True)
     OUTPUT_PATH.write_text(response.text, encoding="utf-8")
-
     print(response.text)
     print(f"\nsaved to {OUTPUT_PATH}")
 
 
+def draw_debug_boxes():
+    items = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+    img = Image.open(INPUT_PATH).convert("RGB")
+    draw = ImageDraw.Draw(img)
+    w, h = img.size
+    font = ImageFont.load_default()
+
+    for item in items:
+        if "box" not in item:
+            continue
+        ymin, xmin, ymax, xmax = item["box"]
+        x0 = xmin / 1000 * w
+        y0 = ymin / 1000 * h
+        x1 = xmax / 1000 * w
+        y1 = ymax / 1000 * h
+        draw.rectangle([x0, y0, x1, y1], outline="red", width=2)
+        label = item.get("text_ru", "")
+        if label:
+            draw.text((x0, max(0, y0 - 10)), label, fill="red", font=font)
+
+    BOXES_PATH.parent.mkdir(exist_ok=True)
+    img.save(BOXES_PATH)
+    print(f"saved debug boxes to {BOXES_PATH}")
+
+
 if __name__ == "__main__":
-    main()
+    # call_gemini()  # already have json, so why to burn another call
+    draw_debug_boxes()
