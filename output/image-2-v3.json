@@ -1,0 +1,600 @@
+[
+  {
+    "id": 1,
+    "text_ru": "ИГ 02.2407.11.000 СБ",
+    "text_en": "IG 02.2407.11.000 SB",
+    "box": [
+      28,
+      116,
+      61,
+      429
+    ],
+    "orientation": "upside_down",
+    "region_type": "field"
+  },
+  {
+    "id": 2,
+    "text_ru": "Перв. примен.",
+    "text_en": "First use",
+    "box": [
+      78,
+      41,
+      162,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 3,
+    "text_ru": "Справ. №",
+    "text_en": "Ref. No.",
+    "box": [
+      292,
+      41,
+      350,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 4,
+    "text_ru": "Подп. и дата",
+    "text_en": "Sign. and date",
+    "box": [
+      511,
+      41,
+      579,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 5,
+    "text_ru": "Инв. № дубл.",
+    "text_en": "Duplicate inv. No.",
+    "box": [
+      617,
+      41,
+      688,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 6,
+    "text_ru": "Взам. инв. №",
+    "text_en": "Repl. inv. No.",
+    "box": [
+      696,
+      41,
+      777,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 7,
+    "text_ru": "Подп. и дата",
+    "text_en": "Sign. and date",
+    "box": [
+      797,
+      41,
+      866,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 8,
+    "text_ru": "Инв. № подл.",
+    "text_en": "Orig. inv. No.",
+    "box": [
+      900,
+      41,
+      971,
+      65
+    ],
+    "orientation": "vertical",
+    "region_type": "field"
+  },
+  {
+    "id": 9,
+    "text_ru": "ГОСТ 5264-80 Т1-5",
+    "text_en": "GOST 5264-80 T1-5",
+    "box": [
+      325,
+      145,
+      345,
+      351
+    ],
+    "orientation": "horizontal",
+    "region_type": "callout"
+  },
+  {
+    "id": 10,
+    "text_ru": "ГОСТ 5264-80 Т10-5",
+    "text_en": "GOST 5264-80 T10-5",
+    "box": [
+      466,
+      492,
+      488,
+      718
+    ],
+    "orientation": "horizontal",
+    "region_type": "callout"
+  },
+  {
+    "id": 11,
+    "text_ru": "1. Электроды Э42 ГОСТ 9467-75",
+    "text_en": "1. Electrodes E42 GOST 9467-75",
+    "box": [
+      523,
+      155,
+      546,
+      537
+    ],
+    "orientation": "horizontal",
+    "region_type": "field"
+  },
+  {
+    "id": 12,
+    "text_ru": "2. *Размеры для справок",
+    "text_en": "2. *Reference dimensions",
+    "box": [
+      549,
+      153,
+      570,
+      447
+    ],
+    "orientation": "horizontal",
+    "region_type": "field"
+  },
+  {
+    "id": 13,
+    "text_ru": "Формат",
+    "text_en": "Format",
+    "box": [
+      580,
+      101,
+      622,
+      122
+    ],
+    "orientation": "vertical",
+    "region_type": "cell"
+  },
+  {
+    "id": 14,
+    "text_ru": "Зона",
+    "text_en": "Zone",
+    "box": [
+      581,
+      131,
+      612,
+      153
+    ],
+    "orientation": "vertical",
+    "region_type": "cell"
+  },
+  {
+    "id": 15,
+    "text_ru": "Поз.",
+    "text_en": "Item",
+    "box": [
+      591,
+      162,
+      613,
+      186
+    ],
+    "orientation": "vertical",
+    "region_type": "cell"
+  },
+  {
+    "id": 16,
+    "text_ru": "Обозначение",
+    "text_en": "Designation",
+    "box": [
+      591,
+      252,
+      612,
+      404
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 17,
+    "text_ru": "Наименование",
+    "text_en": "Description",
+    "box": [
+      591,
+      582,
+      612,
+      747
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 18,
+    "text_ru": "Кол.",
+    "text_en": "Qty",
+    "box": [
+      591,
+      827,
+      612,
+      862
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 19,
+    "text_ru": "Примечание",
+    "text_en": "Note",
+    "box": [
+      586,
+      882,
+      618,
+      949
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 20,
+    "text_ru": "Детали",
+    "text_en": "<u>Parts</u>",
+    "box": [
+      637,
+      572,
+      658,
+      666
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 21,
+    "text_ru": "ИГ 02.2407.11.001",
+    "text_en": "IG 02.2407.11.001",
+    "box": [
+      672,
+      203,
+      693,
+      415
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 22,
+    "text_ru": "Плита",
+    "text_en": "Plate",
+    "box": [
+      671,
+      539,
+      693,
+      611
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 23,
+    "text_ru": "ИГ 02.2407.11.002",
+    "text_en": "IG 02.2407.11.002",
+    "box": [
+      703,
+      204,
+      725,
+      415
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 24,
+    "text_ru": "Цилиндр",
+    "text_en": "Cylinder",
+    "box": [
+      703,
+      538,
+      727,
+      630
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 25,
+    "text_ru": "ИГ 02.2407.11.003",
+    "text_en": "IG 02.2407.11.003",
+    "box": [
+      735,
+      203,
+      757,
+      414
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 26,
+    "text_ru": "Ушко",
+    "text_en": "Lug",
+    "box": [
+      735,
+      538,
+      756,
+      597
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 27,
+    "text_ru": "ИГ 02.2407.11.000 СБ",
+    "text_en": "IG 02.2407.11.000 SB",
+    "box": [
+      808,
+      507,
+      836,
+      852
+    ],
+    "orientation": "horizontal",
+    "region_type": "field"
+  },
+  {
+    "id": 28,
+    "text_ru": "Изм.",
+    "text_en": "Rev.",
+    "box": [
+      865,
+      101,
+      878,
+      128
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 29,
+    "text_ru": "Лист",
+    "text_en": "Sheet",
+    "box": [
+      865,
+      137,
+      878,
+      169
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 30,
+    "text_ru": "№ докум.",
+    "text_en": "Doc. No.",
+    "box": [
+      865,
+      199,
+      878,
+      268
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 31,
+    "text_ru": "Подп.",
+    "text_en": "Sign.",
+    "box": [
+      865,
+      305,
+      878,
+      342
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 32,
+    "text_ru": "Дата",
+    "text_en": "Date",
+    "box": [
+      865,
+      362,
+      878,
+      399
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 33,
+    "text_ru": "Разраб.",
+    "text_en": "Drawn",
+    "box": [
+      881,
+      100,
+      897,
+      159
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 34,
+    "text_ru": "Пров.",
+    "text_en": "Checked",
+    "box": [
+      897,
+      100,
+      913,
+      142
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 35,
+    "text_ru": "Т.контр.",
+    "text_en": "T.contr.",
+    "box": [
+      913,
+      100,
+      929,
+      160
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 36,
+    "text_ru": "Н.контр.",
+    "text_en": "N.contr.",
+    "box": [
+      946,
+      100,
+      963,
+      161
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 37,
+    "text_ru": "Утв.",
+    "text_en": "Appr.",
+    "box": [
+      963,
+      100,
+      978,
+      140
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 38,
+    "text_ru": "Опора",
+    "text_en": "Support",
+    "box": [
+      872,
+      500,
+      912,
+      640
+    ],
+    "orientation": "horizontal",
+    "region_type": "title"
+  },
+  {
+    "id": 39,
+    "text_ru": "Лит.",
+    "text_en": "Lit.",
+    "box": [
+      849,
+      750,
+      861,
+      788
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 40,
+    "text_ru": "Масса",
+    "text_en": "Mass",
+    "box": [
+      849,
+      818,
+      861,
+      873
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 41,
+    "text_ru": "Масштаб",
+    "text_en": "Scale",
+    "box": [
+      848,
+      892,
+      861,
+      969
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 42,
+    "text_ru": "Лист",
+    "text_en": "Sheet",
+    "box": [
+      916,
+      747,
+      928,
+      792
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 43,
+    "text_ru": "Листов",
+    "text_en": "Sheets",
+    "box": [
+      916,
+      846,
+      928,
+      907
+    ],
+    "orientation": "horizontal",
+    "region_type": "cell"
+  },
+  {
+    "id": 44,
+    "text_ru": "ХТ-81",
+    "text_en": "KhT-81",
+    "box": [
+      941,
+      799,
+      968,
+      908
+    ],
+    "orientation": "horizontal",
+    "region_type": "field"
+  },
+  {
+    "id": 45,
+    "text_ru": "Копировал",
+    "text_en": "Copied",
+    "box": [
+      983,
+      452,
+      997,
+      542
+    ],
+    "orientation": "horizontal",
+    "region_type": "field"
+  },
+  {
+    "id": 46,
+    "text_ru": "Формат А4",
+    "text_en": "Format A4",
+    "box": [
+      983,
+      786,
+      997,
+      905
+    ],
+    "orientation": "horizontal",
+    "region_type": "field"
+  }
+]

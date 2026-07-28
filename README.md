@@ -1,169 +1,184 @@
-# Drawing text translator (RU → EN)
+# Test task: drawing translator (RU -> EN)
 
-Translates Russian text on engineering drawings to English using Gemini, then draws the English back onto the image.
+This repo contains my solution for the test task.
 
-**Assumption:** the brief's first line says "translate into Russian", but the body and I/O spec both say Russian in → English out. This project does **RU → EN**.
+Goal: take a Russian engineering drawing, find Russian text on it, translate it to English, and write the English back onto the same image.
+
+I treated the task as **RU -> EN**, because even though the very first line in the brief says otherwise, the actual body and input/output description clearly say: Russian image in, English image out.
+
+## Final version
+
+My final script is:
+
+- `translate_v3.py`
+
+Older versions are still here because they show how I moved step by step:
+
+- `translate.py` — first working end-to-end version
+- `translate_v2.py` — experiment with full cell / label region fill
 
 ## Setup
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env   # put your GEMINI_API_KEY there
+cp .env.example .env
+```
+
+Put your Gemini API key into `.env`:
+
+```bash
+GEMINI_API_KEY=...
 ```
 
 ## Run
 
-**v1** — main pipeline (tight text boxes + expand fill), 1 Gemini call per image:
+Run final version:
 
 ```bash
-python translate.py input/image-1.png
-python translate.py input/image-2.png
-python translate.py input/image-3.png
+python translate_v3.py input/image-1.png
+python translate_v3.py input/image-2.png
+python translate_v3.py input/image-3.png
 ```
 
-**v2** — experiment: full cell/label region fill:
+If JSON already exists and I only want to rerender:
 
 ```bash
-python translate_v2.py input/image-1.png
-python translate_v2.py input/image-2.png
-python translate_v2.py input/image-3.png
+python translate_v3.py input/image-1.png --render-only
 ```
 
-Reuse existing JSON (no Gemini call):
+Main outputs:
 
-```bash
-python translate.py input/image-1.png --render-only
-python translate_v2.py input/image-1.png --render-only
+- `output/<name>-v3.json`
+- `output/<name>-v3-draft.png`
+- `output/<name>-v3-en.png`
+
+## What `v3` does
+
+Pipeline:
+
+```text
+image
+-> Gemini detect + translate
+-> render draft
+-> Gemini verify / quality check
+-> optional one more correction round
+-> final render
 ```
 
-Outputs land in `output/`:
-- `<name>.json` / `<name>-v2.json` — detections + translations
-- `<name>-en.png` / `<name>-v2-en.png` — English drawings
+The final version does a few things differently from the first one:
 
----
+1. asks Gemini not just for text and translation, but also for:
+   - box
+   - orientation
+   - region type (`cell`, `field`, `title`, `callout`)
+2. uses a GOST font for rendering:
+   - `fonts-GOST/GOST_AU.TTF`
+3. tries to preserve borders better by not overfilling white over table lines
+4. does a small quality loop:
+   - render draft
+   - ask Gemini whether coverage is OK
+   - if not, apply small fixes / rerender
+5. supports underlined section labels where needed
 
-## How it works
+## How I approached it
 
-```
-image → Gemini (1 call: OCR + boxes + EN + orientation)
-      → white-fill regions
-      → draw English (shrink-to-fit, rotate if needed)
-      → save PNG
-```
+I intentionally did this in small steps instead of trying to build a “smart” system from the start.
 
-Gemini returns JSON like:
+Order of work:
 
-```json
-[
-  {
-    "text_ru": "Основание",
-    "text_en": "Base",
-    "box": [ymin, xmin, ymax, xmax],
-    "orientation": "horizontal"
-  }
-]
-```
+1. basic repo + requirements
+2. one Gemini call, dump raw JSON
+3. draw debug boxes on top of the image
+4. white-fill Russian text
+5. render English
+6. handle rotated / upside-down text
+7. improve translation quality
+8. improve coverage / borders
+9. improve font
+10. add verification loop
 
-Boxes are normalized **0–1000** (`[ymin, xmin, ymax, xmax]`), then scaled to pixels. Font size comes from box height; text shrinks until it fits width and height. Vertical / upside-down labels are drawn on a transparent layer, rotated, then pasted.
+For this task I think this was the right tradeoff: get a real end-to-end result first, then polish the weak spots.
 
----
-
-## How I built it (step by step)
-
-I kept commits small and checked visuals after each step — no big rewrite until the previous step looked sane.
-
-1. **Skeleton** — repo, `.env`, `requirements.txt`, input images
-2. **Gemini smoke test** — one call, dump raw JSON only (no drawing yet)
-3. **Debug boxes** — draw red rectangles on the image to verify coordinates
-4. **White-fill** — cover Russian (meets the task minimum bar by itself)
-5. **Render English** — shrink-to-fit into boxes
-6. **Rotated text** — left margin + upside-down drawing numbers
-7. **CLI** — `python translate.py input/image-N.png` for all three drawings
-8. **v2 experiment** — full region fill (see below)
-9. **README** — process, decisions, results
-
-Checkpoint that mattered most: step 3. If boxes are wrong, everything downstream is wasted.
-
----
-
-## Decisions & problem handling
+## Main decisions
 
 | Problem / choice | What I did |
 |------------------|------------|
-| Brief contradicts itself (RU vs EN) | Followed body + I/O: **RU → EN**, stated in README |
-| Max 20 Gemini calls / image | **1 call** — detect + translate + orientation together |
-| Bare numbers must stay (rule 7) | Prompt skips number-only items; don't paint `45`, `Ø20`, etc. |
-| Font size vs cell bounds (rules 2 & 4) | Rule 4 wins: shrink-to-fit. Font type = Arial (rule 3 allows any) |
-| Abbreviations | Translit in prompt: `ГОСТ`→`GOST`, `СБ`→`SB`, `ИГ`→`IG` |
-| Vertical / 180° text | Ask Gemini for `orientation`, rotate PIL layer |
-| Tight boxes left Russian edges | Expanded white fill (`inset=-3`) in v1 |
-| Fill still looked patchy on tables | Tried **v2**: ask for full cell/label region, fill whole box |
-| Didn't use n8n | Task asks for code + `requirements.txt`; Pillow pixel work is simpler as a script |
+| Brief contradicts itself | Followed the body of the task: **RU -> EN** |
+| Fewer Gemini calls are secondary | Started with 1 call/image, then allowed extra verification in `v3` |
+| Numbers without Russian text | Left them unchanged |
+| Abbreviations / standards | Transliterate codes like `GOST`, `SB`, `IG`, `TM`; translate normal Russian labels to English |
+| Vertical / upside-down text | Ask Gemini for orientation, then rotate text in Pillow |
+| White fill can damage borders | Use region-aware fill insets and a small correction loop |
+| Generic font looked too off | Switched final version to GOST font |
+| Small title-block cells were messy | Added compact rendering / alignment tweaks |
+| Underlined labels existed in the drawing | Added underline rendering in final version |
 
-Things I **did not** do on purpose (avoid over-engineering):
-- font detection / matching
-- second Gemini validation loop
-- full table-grid reconstruction
-- separate OCR service + translator chain
+## Final results
 
----
+### Final outputs (`v3`)
 
-## Results (evidence)
+| Input | Final output |
+|-------|--------------|
+| [`input/image-1.png`](input/image-1.png) | [`output/image-1-v3-en.png`](output/image-1-v3-en.png) |
+| [`input/image-2.png`](input/image-2.png) | [`output/image-2-v3-en.png`](output/image-2-v3-en.png) |
+| [`input/image-3.png`](input/image-3.png) | [`output/image-3-v3-en.png`](output/image-3-v3-en.png) |
 
-### v1 — `translate.py`
+Also kept:
 
-| Input | Output |
-|-------|--------|
-| [`input/image-1.png`](input/image-1.png) | [`output/image-1-en.png`](output/image-1-en.png) |
-| [`input/image-2.png`](input/image-2.png) | [`output/image-2-en.png`](output/image-2-en.png) |
-| [`input/image-3.png`](input/image-3.png) | [`output/image-3-en.png`](output/image-3-en.png) |
+- draft images: `output/*-v3-draft.png`
+- structured Gemini output: `output/*-v3.json`
 
-Also kept debug / intermediate: [`output/image-1-boxes.png`](output/image-1-boxes.png), [`output/image-1-masked.png`](output/image-1-masked.png).
+### Intermediate versions
 
-### v2 — `translate_v2.py` (experiment)
+I kept older outputs too:
 
-Idea: don't hug the glyphs. Ask Gemini for the **full region to clear** (table cell, stamp field, or label band), white-fill that entire region, then write English inside it. Goal: fewer leftover Russian pixels and cleaner cells.
+- `output/image-1-en.png`, `output/image-2-en.png`, `output/image-3-en.png`
+- `output/image-1-v2-en.png`, `output/image-2-v2-en.png`, `output/image-3-v2-en.png`
 
-| Input | Output |
-|-------|--------|
-| [`input/image-1.png`](input/image-1.png) | [`output/image-1-v2-en.png`](output/image-1-v2-en.png) |
-| [`input/image-2.png`](input/image-2.png) | [`output/image-2-v2-en.png`](output/image-2-v2-en.png) |
-| [`input/image-3.png`](input/image-3.png) | [`output/image-3-v2-en.png`](output/image-3-v2-en.png) |
+They are useful to see how the result improved from a simple pipeline to the final version.
 
-**Takeaway:** v2 is a bit cleaner on table-heavy `image-1`. On drawings 2 and 3 (free-floating notes / callouts) both approaches work; oversized regions can still eat nearby lines if Gemini returns a box that is too large. v1 stays the main script; v2 is kept as a documented alternative.
+## Notes about quality
 
----
+What I specifically tried to improve in the final version:
 
-## Rules followed
-
-1. Russian removed (white fill) and replaced with English  
-2. Font size from box height, shrink-to-fit  
-3. Any font OK (Arial)  
-4. Text kept inside the region  
-5. Abbreviations → translit  
-6. ≤20 Gemini calls (uses **1**)  
-7. Bare numbers left alone  
+- better real English instead of lazy translit for normal labels
+- less damage to borders / grid lines
+- better font fit
+- better handling of tiny title-block cells
+- better handling of underlined labels
+- small verification loop for missed coverage
 
 ## Known limitations
 
-- Gemini boxes can still be slightly off → leftover pixels or over-paint  
-- Some stamp/margin labels come back as translit instead of real English  
-- Multi-line cells can split (`Примечание`)  
-- Weld callouts / special symbols may be incomplete  
-- Rotation works, not perfect on every label  
-- Aware of some text not being translated, but rather substituted wirh translit in english. (Solved with iterations)
+Even in `v3`, some limitations remain:
 
-## What can be improved later
+- Gemini can still give imperfect boxes in hard areas
+- some weld / special symbols are sensitive and may still need manual polish
+- tiny title-block cells are the hardest area on these drawings
+- verification loop is intentionally small, not an unlimited retry system
+- one of the issues I noticed during development was normal labels being transliterated instead of actually translated; that is improved in `v3`, but it is still something I would keep checking
 
-If more time / higher quality is needed, natural next steps (without rewriting the whole pipeline):
+## What I would improve next with more time
 
-1. **Second Gemini pass on leftovers** — after the first render, crop regions that still look Cyrillic (or ask the model to list missed boxes) and re-run only those. Still well under the 20-call budget (e.g. 2–3 calls/image).
-2. **Harder number filter in code** — drop any item with no Cyrillic before painting, so bare digits / `Ø20` never depend on the prompt alone.
-3. **Merge split lines** — detect neighbouring boxes that are one word split across lines (`Приме-` / `чание`) and treat them as one region + one translation.
-4. **Better cover without eating lines** — sample border pixels and only expand the white fill where ink remains; or blend v1 tight boxes with v2 full cells by region type (`cell` vs `callout`).
-5. **Prompt polish** — force real English for stamp fields (`First applied`, not `Perv. primen.`) while keeping abbrev translit for `GOST` / `SB` / `IG`.
-6. **Weld / special symbols** — ask Gemini to keep `△`, `Ø`, and GOST callout structure intact in `text_en`.
-7. **Title-block crop** — small text in the stamp is where boxes fail most; a second call on an upscaled crop of that area would help.
-8. **Optional: wrap as a service** — same script behind a tiny HTTP/n8n webhook for batch jobs (orchestration only; keep Pillow logic in Python).
+If I had more time, I would improve:
 
-I stopped here on purpose: a working E2E + honest limits beats a half-finished “perfect” stack inside the time box. 
+1. targeted crop-based reprocessing for only failed areas
+2. better handling of special weld symbols and notation
+3. merging of split multi-line text automatically
+4. smarter line reconstruction instead of only white-fill + rerender
+5. stronger verification for title-block microtext
+
+## Summary
+
+My final answer is `translate_v3.py`.
+
+It is not over-engineered, but it is more than just a single naive render:
+
+- detection
+- translation
+- orientation handling
+- GOST font rendering
+- underline handling
+- quality verification loop
+
+That felt like the best balance between quality and time for this task.
