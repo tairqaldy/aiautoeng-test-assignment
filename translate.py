@@ -12,6 +12,7 @@ load_dotenv()
 INPUT_PATH = Path("input/image-1.png")
 OUTPUT_PATH = Path("output/image-1.json")
 BOXES_PATH = Path("output/image-1-boxes.png")
+MASKED_PATH = Path("output/image-1-masked.png")
 
 PROMPT = """
 Find all Russian text on this engineering drawing.
@@ -77,6 +78,32 @@ def draw_debug_boxes():
     print(f"saved debug boxes to {BOXES_PATH}")
 
 
+def box_to_pixels(box, w, h, inset=2):
+    ymin, xmin, ymax, xmax = box
+    x0 = xmin / 1000 * w + inset
+    y0 = ymin / 1000 * h + inset
+    x1 = xmax / 1000 * w - inset
+    y1 = ymax / 1000 * h - inset
+    return [x0, y0, x1, y1]
+
+
+def mask_russian():
+    items = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+    img = Image.open(INPUT_PATH).convert("RGB")
+    draw = ImageDraw.Draw(img)
+    w, h = img.size
+
+    for item in items:
+        if "box" not in item:
+            continue
+        draw.rectangle(box_to_pixels(item["box"], w, h), fill="white")
+
+    MASKED_PATH.parent.mkdir(exist_ok=True)
+    img.save(MASKED_PATH)
+    print(f"saved masked image to {MASKED_PATH}")
+
+
 if __name__ == "__main__":
-    # call_gemini()  # already have json, so why to burn another call
-    draw_debug_boxes()
+    # call_gemini()
+    # draw_debug_boxes()
+    mask_russian()
