@@ -1,2 +1,4 @@
 dev-mats/*
-
+.env
+output/
+__pycache__/
