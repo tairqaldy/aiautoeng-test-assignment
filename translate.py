@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -9,11 +10,6 @@ from PIL import Image, ImageDraw, ImageFont
 
 load_dotenv()
 
-INPUT_PATH = Path("input/image-1.png")
-OUTPUT_PATH = Path("output/image-1.json")
-BOXES_PATH = Path("output/image-1-boxes.png")
-MASKED_PATH = Path("output/image-1-masked.png")
-EN_PATH = Path("output/image-1-en.png")
 FONT_PATH = Path("C:/Windows/Fonts/arial.ttf")
 
 PROMPT = """
@@ -28,6 +24,23 @@ Return JSON only: a list of objects with:
 Skip numbers with no text (45, 130, Ø20, etc).
 Keep translations short so they fit in table cells.
 """
+
+INPUT_PATH = Path("input/image-1.png")
+OUTPUT_PATH = Path("output/image-1.json")
+BOXES_PATH = Path("output/image-1-boxes.png")
+MASKED_PATH = Path("output/image-1-masked.png")
+EN_PATH = Path("output/image-1-en.png")
+
+
+def set_paths(image_path):
+    global INPUT_PATH, OUTPUT_PATH, BOXES_PATH, MASKED_PATH, EN_PATH
+    INPUT_PATH = Path(image_path)
+    stem = INPUT_PATH.stem
+    out = Path("output")
+    OUTPUT_PATH = out / f"{stem}.json"
+    BOXES_PATH = out / f"{stem}-boxes.png"
+    MASKED_PATH = out / f"{stem}-masked.png"
+    EN_PATH = out / f"{stem}-en.png"
 
 
 def call_gemini():
@@ -162,7 +175,13 @@ def render_english():
 
 
 if __name__ == "__main__":
-    # call_gemini()
-    # draw_debug_boxes()
-    # mask_russian()
+    if len(sys.argv) < 2:
+        raise SystemExit("Usage: python translate.py input/image-1.png [--render-only]")
+
+    set_paths(sys.argv[1])
+    if not INPUT_PATH.exists():
+        raise SystemExit(f"file not found: {INPUT_PATH}")
+
+    if "--render-only" not in sys.argv:
+        call_gemini()
     render_english()
