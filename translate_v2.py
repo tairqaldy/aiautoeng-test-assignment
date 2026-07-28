@@ -71,7 +71,11 @@ def call_gemini():
 
     OUTPUT_PATH.parent.mkdir(exist_ok=True)
     OUTPUT_PATH.write_text(response.text, encoding="utf-8")
-    print(response.text)
+    # Windows console may not support all chars (e.g. △) — file is still UTF-8
+    try:
+        print(response.text)
+    except UnicodeEncodeError:
+        print(response.text.encode("utf-8", errors="replace").decode("ascii", errors="replace"))
     print(f"\nsaved to {OUTPUT_PATH}")
 
 
