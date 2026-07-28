@@ -111,7 +111,7 @@ def mask_russian():
     for item in items:
         if "box" not in item:
             continue
-        draw.rectangle(box_to_pixels(item["box"], w, h), fill="white")
+        draw.rectangle(box_to_pixels(item["box"], w, h, inset=-3), fill="white")
 
     MASKED_PATH.parent.mkdir(exist_ok=True)
     img.save(MASKED_PATH)
@@ -165,9 +165,10 @@ def render_english():
     for item in items:
         if "box" not in item or not item.get("text_en"):
             continue
-        box = box_to_pixels(item["box"], w, h)
-        draw.rectangle(box, fill="white")
-        paste_text(img, item["text_en"], box, item.get("orientation", "horizontal"))
+        # expand fill so russian edges are covered; keep text slightly inset
+        draw.rectangle(box_to_pixels(item["box"], w, h, inset=-3), fill="white")
+        text_box = box_to_pixels(item["box"], w, h, inset=2)
+        paste_text(img, item["text_en"], text_box, item.get("orientation", "horizontal"))
 
     EN_PATH.parent.mkdir(exist_ok=True)
     img.convert("RGB").save(EN_PATH)
