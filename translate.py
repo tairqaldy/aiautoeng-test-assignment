@@ -13,6 +13,8 @@ INPUT_PATH = Path("input/image-1.png")
 OUTPUT_PATH = Path("output/image-1.json")
 BOXES_PATH = Path("output/image-1-boxes.png")
 MASKED_PATH = Path("output/image-1-masked.png")
+EN_PATH = Path("output/image-1-en.png")
+FONT_PATH = Path("C:/Windows/Fonts/arial.ttf")
 
 PROMPT = """
 Find all Russian text on this engineering drawing.
@@ -103,7 +105,44 @@ def mask_russian():
     print(f"saved masked image to {MASKED_PATH}")
 
 
+def fit_font(text, max_w, max_h):
+    size = max(int(max_h), 6)
+    while size > 5:
+        font = ImageFont.truetype(str(FONT_PATH), size)
+        bbox = font.getbbox(text)
+        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        if tw <= max_w and th <= max_h:
+            return font
+        size -= 1
+    return ImageFont.truetype(str(FONT_PATH), 5)
+
+
+def render_english():
+    items = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+    img = Image.open(INPUT_PATH).convert("RGB")
+    draw = ImageDraw.Draw(img)
+    w, h = img.size
+
+    for item in items:
+        if "box" not in item or not item.get("text_en"):
+            continue
+        x0, y0, x1, y1 = box_to_pixels(item["box"], w, h)
+        draw.rectangle([x0, y0, x1, y1], fill="white")
+
+        # vertical / upside_down later — horizontal for now
+        text = item["text_en"]
+        max_w = max(x1 - x0, 1)
+        max_h = max(y1 - y0, 1)
+        font = fit_font(text, max_w, max_h)
+        draw.text((x0, y0), text, fill="black", font=font)
+
+    EN_PATH.parent.mkdir(exist_ok=True)
+    img.save(EN_PATH)
+    print(f"saved english image to {EN_PATH}")
+
+
 if __name__ == "__main__":
     # call_gemini()
     # draw_debug_boxes()
-    mask_russian()
+    # mask_russian()
+    render_english()
