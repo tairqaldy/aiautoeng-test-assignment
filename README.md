@@ -151,6 +151,7 @@ Idea: don't hug the glyphs. Ask Gemini for the **full region to clear** (table c
 - Multi-line cells can split (`Примечание`)  
 - Weld callouts / special symbols may be incomplete  
 - Rotation works, not perfect on every label  
+- Aware of some text not being translated, but rather substituted wirh translit in english. (Solved with iterations)
 
 ## What can be improved later
 
@@ -165,4 +166,4 @@ If more time / higher quality is needed, natural next steps (without rewriting t
 7. **Title-block crop** — small text in the stamp is where boxes fail most; a second call on an upscaled crop of that area would help.
 8. **Optional: wrap as a service** — same script behind a tiny HTTP/n8n webhook for batch jobs (orchestration only; keep Pillow logic in Python).
 
-I stopped here on purpose: a working E2E + honest limits beats a half-finished “perfect” stack inside the time box. Also, im aware of some text being not translated, part with translit rather than translating it into english. (Solved with iterations)
+I stopped here on purpose: a working E2E + honest limits beats a half-finished “perfect” stack inside the time box. 
