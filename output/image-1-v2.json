@@ -1,0 +1,260 @@
+[
+  {
+    "text_ru": "Перв. примен.",
+    "text_en": "Perv. primen.",
+    "box": [82, 42, 161, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Справ. №",
+    "text_en": "Sprav. No.",
+    "box": [290, 42, 345, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Подп. и дата",
+    "text_en": "Podp. i data",
+    "box": [516, 42, 584, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Инв. № дубл.",
+    "text_en": "Inv. No. dubl.",
+    "box": [618, 42, 693, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Взам. инв. №",
+    "text_en": "Vzam. inv. No.",
+    "box": [699, 42, 775, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Подп. и дата",
+    "text_en": "Podp. i data",
+    "box": [801, 42, 869, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Инв. № подл.",
+    "text_en": "Inv. No. podl.",
+    "box": [902, 42, 977, 63],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Формат",
+    "text_en": "Format",
+    "box": [24, 100, 68, 126],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Зона",
+    "text_en": "Zone",
+    "box": [24, 131, 56, 153],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Поз.",
+    "text_en": "Pos.",
+    "box": [24, 158, 54, 180],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Обозначение",
+    "text_en": "Designation",
+    "box": [33, 278, 54, 431],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Наименование",
+    "text_en": "Name / Description",
+    "box": [33, 585, 54, 755],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Кол.",
+    "text_en": "Qty",
+    "box": [24, 835, 56, 856],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Примечание",
+    "text_en": "Note",
+    "box": [23, 878, 68, 966],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Документация",
+    "text_en": "Documentation",
+    "box": [100, 532, 121, 712],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.000 СБ",
+    "text_en": "IG 03.1501.12.000 SB",
+    "box": [153, 195, 175, 437],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Сборочный чертеж",
+    "text_en": "Assembly drawing",
+    "box": [153, 535, 177, 755],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Детали",
+    "text_en": "Parts",
+    "box": [206, 532, 227, 627],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.001",
+    "text_en": "IG 03.1501.12.001",
+    "box": [258, 195, 280, 396],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Основание",
+    "text_en": "Base",
+    "box": [258, 535, 280, 660],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.002",
+    "text_en": "IG 03.1501.12.002",
+    "box": [285, 195, 307, 401],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Стойка",
+    "text_en": "Post / Stand",
+    "box": [285, 535, 307, 625],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.003",
+    "text_en": "IG 03.1501.12.003",
+    "box": [312, 195, 334, 398],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Крышка",
+    "text_en": "Cover / Lid",
+    "box": [312, 535, 334, 628],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.004",
+    "text_en": "IG 03.1501.12.004",
+    "box": [339, 195, 361, 398],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Уголок",
+    "text_en": "Angle bracket",
+    "box": [339, 535, 361, 620],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Изм.",
+    "text_en": "Rev.",
+    "box": [883, 98, 897, 126],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Лист",
+    "text_en": "Sheet",
+    "box": [883, 137, 897, 173],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "№ докум.",
+    "text_en": "Doc. No.",
+    "box": [883, 197, 898, 273],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Подп.",
+    "text_en": "Sign.",
+    "box": [883, 305, 897, 345],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Дата",
+    "text_en": "Date",
+    "box": [883, 360, 897, 401],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Разраб.",
+    "text_en": "Drawn",
+    "box": [900, 98, 914, 149],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Пров.",
+    "text_en": "Checked",
+    "box": [915, 98, 929, 137],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Н.контр.",
+    "text_en": "N.kontr.",
+    "box": [949, 98, 963, 169],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Утв.",
+    "text_en": "Appr.",
+    "box": [964, 98, 978, 138],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.000",
+    "text_en": "IG 03.1501.12.000",
+    "box": [858, 545, 887, 831],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Сварное соединение",
+    "text_en": "Welded joint",
+    "box": [921, 412, 959, 725],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Лит.",
+    "text_en": "Lit.",
+    "box": [901, 751, 913, 786],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Лист",
+    "text_en": "Sheet",
+    "box": [901, 822, 913, 862],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Листов",
+    "text_en": "Sheets",
+    "box": [901, 894, 913, 955],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "гр. ТМ-71",
+    "text_en": "gr. TM-71",
+    "box": [940, 772, 971, 936],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Копировал",
+    "text_en": "Copied by",
+    "box": [983, 455, 996, 542],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Формат A4",
+    "text_en": "Format A4",
+    "box": [983, 785, 997, 905],
+    "orientation": "horizontal"
+  }
+]
