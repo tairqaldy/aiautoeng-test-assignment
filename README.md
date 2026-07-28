@@ -151,3 +151,18 @@ Idea: don't hug the glyphs. Ask Gemini for the **full region to clear** (table c
 - Multi-line cells can split (`Примечание`)  
 - Weld callouts / special symbols may be incomplete  
 - Rotation works, not perfect on every label  
+
+## What can be improved later
+
+If more time / higher quality is needed, natural next steps (without rewriting the whole pipeline):
+
+1. **Second Gemini pass on leftovers** — after the first render, crop regions that still look Cyrillic (or ask the model to list missed boxes) and re-run only those. Still well under the 20-call budget (e.g. 2–3 calls/image).
+2. **Harder number filter in code** — drop any item with no Cyrillic before painting, so bare digits / `Ø20` never depend on the prompt alone.
+3. **Merge split lines** — detect neighbouring boxes that are one word split across lines (`Приме-` / `чание`) and treat them as one region + one translation.
+4. **Better cover without eating lines** — sample border pixels and only expand the white fill where ink remains; or blend v1 tight boxes with v2 full cells by region type (`cell` vs `callout`).
+5. **Prompt polish** — force real English for stamp fields (`First applied`, not `Perv. primen.`) while keeping abbrev translit for `GOST` / `SB` / `IG`.
+6. **Weld / special symbols** — ask Gemini to keep `△`, `Ø`, and GOST callout structure intact in `text_en`.
+7. **Title-block crop** — small text in the stamp is where boxes fail most; a second call on an upscaled crop of that area would help.
+8. **Optional: wrap as a service** — same script behind a tiny HTTP/n8n webhook for batch jobs (orchestration only; keep Pillow logic in Python).
+
+I stopped here on purpose: a working E2E + honest limits beats a half-finished “perfect” stack inside the time box.
