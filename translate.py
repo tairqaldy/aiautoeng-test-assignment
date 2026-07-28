@@ -117,27 +117,47 @@ def fit_font(text, max_w, max_h):
     return ImageFont.truetype(str(FONT_PATH), 5)
 
 
+def paste_text(img, text, box, orientation):
+    x0, y0, x1, y1 = [int(v) for v in box]
+    bw, bh = max(x1 - x0, 1), max(y1 - y0, 1)
+
+    if orientation == "vertical":
+        font = fit_font(text, bh, bw)
+        angle = 90
+    elif orientation == "upside_down":
+        font = fit_font(text, bw, bh)
+        angle = 180
+    else:
+        font = fit_font(text, bw, bh)
+        angle = 0
+
+    l, t, r, b = font.getbbox(text)
+    tw, th = max(r - l, 1), max(b - t, 1)
+    layer = Image.new("RGBA", (tw, th), (0, 0, 0, 0))
+    ImageDraw.Draw(layer).text((-l, -t), text, fill="black", font=font)
+    if angle:
+        layer = layer.rotate(angle, expand=True)
+
+    px = x0 + (bw - layer.width) // 2
+    py = y0 + (bh - layer.height) // 2
+    img.paste(layer, (px, py), layer)
+
+
 def render_english():
     items = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
-    img = Image.open(INPUT_PATH).convert("RGB")
+    img = Image.open(INPUT_PATH).convert("RGBA")
     draw = ImageDraw.Draw(img)
     w, h = img.size
 
     for item in items:
         if "box" not in item or not item.get("text_en"):
             continue
-        x0, y0, x1, y1 = box_to_pixels(item["box"], w, h)
-        draw.rectangle([x0, y0, x1, y1], fill="white")
-
-        # vertical / upside_down later — horizontal for now
-        text = item["text_en"]
-        max_w = max(x1 - x0, 1)
-        max_h = max(y1 - y0, 1)
-        font = fit_font(text, max_w, max_h)
-        draw.text((x0, y0), text, fill="black", font=font)
+        box = box_to_pixels(item["box"], w, h)
+        draw.rectangle(box, fill="white")
+        paste_text(img, item["text_en"], box, item.get("orientation", "horizontal"))
 
     EN_PATH.parent.mkdir(exist_ok=True)
-    img.save(EN_PATH)
+    img.convert("RGB").save(EN_PATH)
     print(f"saved english image to {EN_PATH}")
 
 
