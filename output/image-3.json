@@ -1,0 +1,194 @@
+[
+  {
+    "text_ru": "ИГ 03.1501.12.000 СБ",
+    "text_en": "IG 03.1501.12.000 SB",
+    "box": [26, 109, 58, 422],
+    "orientation": "upside_down"
+  },
+  {
+    "text_ru": "Перв. примен.",
+    "text_en": "Perv. primen.",
+    "box": [77, 43, 151, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Справ. №",
+    "text_en": "Sprav. N",
+    "box": [290, 42, 345, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Подп. и дата",
+    "text_en": "Podp. i data",
+    "box": [510, 42, 588, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Инв. № дубл.",
+    "text_en": "Inv. N dubl.",
+    "box": [618, 42, 693, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Взам. инв. №",
+    "text_en": "Vzam. inv. N",
+    "box": [699, 42, 775, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Подп. и дата",
+    "text_en": "Podp. i data",
+    "box": [797, 42, 875, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "Инв. № подл.",
+    "text_en": "Inv. N podl.",
+    "box": [899, 42, 977, 62],
+    "orientation": "vertical"
+  },
+  {
+    "text_ru": "ГОСТ 5264-80 У6-",
+    "text_en": "GOST 5264-80 U6-",
+    "box": [220, 620, 246, 786],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ГОСТ 5264-80 Т4-",
+    "text_en": "GOST 5264-80 T4-",
+    "box": [672, 316, 693, 482],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "1. Электроды Э42 ГОСТ 9467-75",
+    "text_en": "1. Electrodes E42 GOST 9467-75",
+    "box": [738, 165, 761, 558],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "2. *Размеры для справок",
+    "text_en": "2. *Reference dimensions",
+    "box": [763, 166, 788, 467],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "ИГ 03.1501.12.000 СБ",
+    "text_en": "IG 03.1501.12.000 SB",
+    "box": [808, 519, 836, 853],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Сварное соединение",
+    "text_en": "Welded joint",
+    "box": [868, 412, 912, 725],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Изм.",
+    "text_en": "Izm.",
+    "box": [865, 100, 878, 127],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Лист",
+    "text_en": "Sheet",
+    "box": [865, 137, 878, 172],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "№ докум.",
+    "text_en": "N docum.",
+    "box": [865, 196, 878, 269],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Подп.",
+    "text_en": "Sign.",
+    "box": [865, 303, 878, 342],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Дата",
+    "text_en": "Date",
+    "box": [865, 362, 878, 400],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Разраб.",
+    "text_en": "Drawn",
+    "box": [880, 99, 893, 155],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Пров.",
+    "text_en": "Check.",
+    "box": [896, 100, 911, 142],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Т.контр.",
+    "text_en": "T.contr.",
+    "box": [913, 100, 929, 168],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Н.контр.",
+    "text_en": "N.contr.",
+    "box": [948, 100, 963, 169],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Утв.",
+    "text_en": "Appr.",
+    "box": [964, 100, 977, 137],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Лит.",
+    "text_en": "Lit.",
+    "box": [849, 749, 861, 784],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Масса",
+    "text_en": "Weight",
+    "box": [849, 816, 861, 871],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Масштаб",
+    "text_en": "Scale",
+    "box": [849, 892, 861, 968],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Лист",
+    "text_en": "Sheet",
+    "box": [915, 747, 928, 792],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Листов",
+    "text_en": "Sheets",
+    "box": [915, 843, 928, 910],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "гр. ТМ-71",
+    "text_en": "gr. TM-71",
+    "box": [937, 773, 972, 940],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Копировал",
+    "text_en": "Copied",
+    "box": [982, 458, 997, 541],
+    "orientation": "horizontal"
+  },
+  {
+    "text_ru": "Формат A4",
+    "text_en": "Format A4",
+    "box": [982, 786, 997, 903],
+    "orientation": "horizontal"
+  }
+]
